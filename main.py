@@ -11,7 +11,7 @@ clock = pygame.time.Clock()
 running = True
 dt = 0
 
-player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
+player_pos = pygame.Vector2(screen.get_width() / 3, screen.get_height() / 2)
 
 while running:
     #check events
@@ -21,7 +21,7 @@ while running:
 
     #fill screen with purple to wipe away last frame
 
-    screen.fill("purple")
+    screen.fill(color=(168, 229, 24))
 
     pygame.draw.circle(screen, "red", player_pos, 40)
 
