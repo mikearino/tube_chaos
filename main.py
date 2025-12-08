@@ -10,8 +10,10 @@ screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
 running = True
 dt = 0
-
-player_pos = pygame.Vector2(screen.get_width() / 3, screen.get_height() / 2)
+shore = pygame.image.load("assets/images/shore.png")
+water = pygame.image.load("assets/images/water.png")
+left_shore_pos_x = 208
+player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
 
 while running:
     #check events
@@ -22,6 +24,11 @@ while running:
     #fill screen with purple to wipe away last frame
 
     screen.fill(color=(168, 229, 24))
+    
+    #Draw in shoreline columns
+    for y in range(23):
+        left_shore_pos_y = y * 32
+        screen.blit(shore, (left_shore_pos_x, left_shore_pos_y))
 
     pygame.draw.circle(screen, "red", player_pos, 40)
 
