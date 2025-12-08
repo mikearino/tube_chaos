@@ -37,6 +37,13 @@ while running:
         right_shore_pos_y = y * 32
         screen.blit(flipped_shore, (right_shore_pos_x, right_shore_pos_y))
 
+    for row in range(12): #vertical
+        for col in range(1, 26): #horizontal (water columns)
+            result_x = left_shore_pos_x + col * 32
+            result_y = row * 64
+            screen.blit(water, (result_x, result_y))
+
+
     pygame.draw.circle(screen, "red", player_pos, 40)
 
     keys = pygame.key.get_pressed()
