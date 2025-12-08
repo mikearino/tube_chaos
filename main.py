@@ -12,7 +12,9 @@ running = True
 dt = 0
 shore = pygame.image.load("assets/images/shore.png")
 water = pygame.image.load("assets/images/water.png")
+flipped_shore = pygame.transform.flip(shore, True, False)
 left_shore_pos_x = 208
+right_shore_pos_x = left_shore_pos_x + 32 +800
 player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
 
 while running:
@@ -25,10 +27,15 @@ while running:
 
     screen.fill(color=(168, 229, 24))
     
-    #Draw in shoreline columns
+    #draw in shoreline columns left 
     for y in range(23):
         left_shore_pos_y = y * 32
         screen.blit(shore, (left_shore_pos_x, left_shore_pos_y))
+
+    #right shore
+    for y in range(23):
+        right_shore_pos_y = y * 32
+        screen.blit(flipped_shore, (right_shore_pos_x, right_shore_pos_y))
 
     pygame.draw.circle(screen, "red", player_pos, 40)
 
