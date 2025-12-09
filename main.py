@@ -16,6 +16,8 @@ flipped_shore = pygame.transform.flip(shore, True, False)
 left_shore_pos_x = 208
 right_shore_pos_x = left_shore_pos_x + 32 +800
 player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
+water_offset_y = 0
+water_speed = 100
 
 while running:
     #check events
@@ -23,10 +25,23 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    #fill screen with purple to wipe away last frame
 
     screen.fill(color=(168, 229, 24))
     
+    dt = clock.tick(60) / 1000 #limits FPS to 60
+
+     #water tile movement
+    water_offset_y += water_speed * dt
+    water_offset_y = water_offset_y % 64
+
+    #water tiles
+    for row in range(14): #vertical
+        for col in range(1, 26): #horizontal (water columns)
+            result_x = left_shore_pos_x + col * 32
+            result_y = row * 64 + water_offset_y - 64
+            screen.blit(water, (result_x, result_y))
+
+
     #draw in shoreline columns left 
     for y in range(23):
         left_shore_pos_y = y * 32
@@ -37,13 +52,8 @@ while running:
         right_shore_pos_y = y * 32
         screen.blit(flipped_shore, (right_shore_pos_x, right_shore_pos_y))
 
-    for row in range(12): #vertical
-        for col in range(1, 26): #horizontal (water columns)
-            result_x = left_shore_pos_x + col * 32
-            result_y = row * 64
-            screen.blit(water, (result_x, result_y))
-
-
+    
+    #draw raft
     pygame.draw.circle(screen, "red", player_pos, 40)
 
     keys = pygame.key.get_pressed()
@@ -58,6 +68,5 @@ while running:
     #flip() puts work on screen
     pygame.display.flip()
 
-    dt = clock.tick(60) / 1000 #limits FPS to 60
 
 pygame.quit()
