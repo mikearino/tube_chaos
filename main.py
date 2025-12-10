@@ -6,7 +6,12 @@ from pygame.locals import(
 )
 
 pygame.init()
-screen = pygame.display.set_mode((1280, 720))
+screen = pygame.display.set_mode(
+    (1280, 720),
+    pygame.SCALED | pygame.DOUBLEBUF,
+    vsync=1
+)
+
 clock = pygame.time.Clock()
 running = True
 dt = 0
@@ -27,19 +32,18 @@ while running:
 
 
     screen.fill(color=(168, 229, 24))
-    
-    dt = clock.tick(60) / 1000 #limits FPS to 60
+    dt = clock.tick() / 1000 #limits FPS to 60
 
      #water tile movement
     water_offset_y += water_speed * dt
     water_offset_y = water_offset_y % 64
 
     #water tiles
-    for row in range(14): #vertical
+    for row in range(13): #vertical
         for col in range(1, 26): #horizontal (water columns)
             result_x = left_shore_pos_x + col * 32
             result_y = row * 64 + water_offset_y - 64
-            screen.blit(water, (result_x, result_y))
+            screen.blit(water, (result_x, int(result_y)))
 
 
     #draw in shoreline columns left 
