@@ -24,6 +24,11 @@ player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
 water_offset_y = 0
 water_speed = 100
 
+class Rock:
+    def __init__(self, image, x, y):
+        self.image = image
+        self.rect = image.get_rect(center=(x, y))
+
 while running:
     #check events
     for event in pygame.event.get():
